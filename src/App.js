@@ -1,25 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+//#region Exe-1 Increment Decrement Counter
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+// import React from 'react';
+// import Employee from './Exe-1-Increment&Decrement/Employee';
+// import { legacy_createStore as createStore} from 'redux';
+// import { Provider } from 'react-redux';
+
+// const employeeData={
+//   salary:15000
+// };
+
+// const reducer=(state=employeeData,action)=>{
+//   switch(action.type){
+//     case 'INCREMENT':
+//       return {salary:state.salary+1000};
+    
+//     case 'DECREMENT':
+//       return {salary:state.salary-1000};
+
+//     default:
+//       return state;
+//   }
+// }
+
+// const store = createStore(reducer);
+
+
+// const App=()=>(
+//   <Provider store={store}>
+//     <Employee></Employee>
+//   </Provider>
+// );
+
+// export default App;
+
+//#endregion
+
+
+//#region Exe-2 Different Increment Decrement Counter.
+import {useSelector,useDispatch} from 'react-redux'
+import {addOne,subOne,addSome,subSome,reset} from './Exe-2-DifferentIncrement&Decrement/store/actions/count.actions'
+
+function App (){
+  const dispatch = useDispatch();
+  const count = useSelector(state =>state.count);
+
+  return(    
+      <div className='App'>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Count is: {count}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        <div>
+          <button onClick={()=>dispatch(addOne())}>Add 1</button>
+          <button onClick={()=>dispatch(subOne())}>Sub 1</button>
+          <button onClick={()=>dispatch(addSome(10))}>Add Some</button>
+          <button onClick={()=>dispatch(subSome(10))}>Sub Some</button>
+          <button onClick={()=>dispatch(reset())}>Reset</button>
+        </div>
+      </div>
+    
+  )
 }
-
-export default App;
+export default App
